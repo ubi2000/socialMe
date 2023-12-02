@@ -14,8 +14,8 @@ const{
     lastName,
     email,
     password,
-    // picturePath,
-    // friends,
+    picturePath,
+    friends,
     location,
     occupation
 } =req.body;
@@ -27,8 +27,8 @@ const newUser= new User({
     lastName,
     email,
     password:passwordHash,
-    // picturePath,
-    // friends,
+    picturePath,
+    friends,
     location,
     occupation,
     viewedProfile:Math.floor(Math.random()*10000),

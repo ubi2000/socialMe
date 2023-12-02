@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../state/index";
 import Dropzone from "react-dropzone";
-import FlexBetween from "../components/FlexBetween";
+import FlexBetween from "../components/FlexBetween"
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -46,11 +46,6 @@ const initialValuesLogin = {
   password: "",
 };
 
-
-
-
-
-
 const Form = () => {
   const [pageType, setPageType] = useState("login");
   const { palette } = useTheme();
@@ -60,15 +55,15 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
-//Register
-const register = async (values, onSubmitProps) => {
+  //Register
+  const register = async (values, onSubmitProps) => {
     //set form info with image
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
     }
     formData.append("picturePath", values.picture.name);
-  
+
     const savedUserResponse = await fetch(
       "http://localhost:3000/auth/register",
       {
@@ -78,14 +73,13 @@ const register = async (values, onSubmitProps) => {
     );
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
-  
+
     if (savedUser) {
       setPageType("login");
     }
   };
-  
 
-//Login 
+  //Login
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch("http://localhost:3000/auth/login", {
       method: "POST",
@@ -104,7 +98,7 @@ const register = async (values, onSubmitProps) => {
       navigate("/home");
     }
   };
- 
+
   const handleFormSubmit = async (values, onSubmitProps) => {
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
