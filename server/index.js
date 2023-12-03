@@ -31,6 +31,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.set('view engine', 'ejs');
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
@@ -53,6 +54,10 @@ app.post("/posts", verifyToken, upload.single("picture"), createPost);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/posts", postRoutes);
+app.get("/",(req,res)=>{
+  const message = 'Welcome to the backend!';
+  res.render('home', { message });
+})
 
 //Mongoose Setup
 
